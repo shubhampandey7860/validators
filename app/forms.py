@@ -1,5 +1,5 @@
 from django import forms
-
+from django.core import validators
 # validators method
 def validate_for_a(value):
     if value[0]=='a' or value[0]=='A':
@@ -13,6 +13,7 @@ def forlen(value):
 class RegistrationForm(forms.Form):
     name  =     forms.CharField(max_length=100,validators=[validate_for_a,forlen]) 
     age   =     forms.IntegerField()
+    mobile=forms.CharField(max_length=10,min_length=10,validators=[validators.RegexValidator('[6-9]\d{9}')]) 
     email =    forms.EmailField(max_length=100)
     re_email = forms.EmailField(max_length=100)
     password = forms.CharField(max_length=10,widget=forms.PasswordInput)
